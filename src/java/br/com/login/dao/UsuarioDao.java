@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.login.model.UsuarioModel;
-import br.com.login.dao.DBUtil;
+import br.com.login.dao.ConexaoDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class UsuarioDao {
 	private Connection conn;
 	public UsuarioDao() {
 		
-		conn = DBUtil.getConnection();
+		conn = ConexaoDB.getConnection();
 	}
 
 	public boolean validarLogin(String pEmail,String pSenha)
