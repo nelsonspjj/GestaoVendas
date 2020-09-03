@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.com.login.dao.UserDao;
-import br.com.login.model.Login;
+import br.com.login.dao.UsuarioDao;
+import br.com.login.model.UsuarioModel;
 
 @WebServlet(name = "Login", urlPatterns = { "/Login" }) //set in web.xml
 public class LoginController extends HttpServlet{
@@ -21,12 +21,12 @@ public class LoginController extends HttpServlet{
 	private static String ADMINPG= "/admin.jsp";
 	private static String WELCMPG= "/welcome.jsp";
 	//private static String REGISTPG= "/registration.jsp";
-	private UserDao dao;	
+	private UsuarioDao dao;	
 	
 	public LoginController()
 	{
 		super();
-		dao = new UserDao();//create new data object to interact with database
+		dao = new UsuarioDao();//create new data object to interact with database
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException
@@ -55,7 +55,7 @@ public class LoginController extends HttpServlet{
 		{
 			redirectPage= EDITPG;
 			int userid = Integer.parseInt(request.getParameter("userid")); //get this objects id
-			Login user = dao.getUserByID(userid); //user object
+			UsuarioModel user = dao.getUserByID(userid); //user object
 			request.setAttribute("user", user); //sends user data to jsp
 		}
 		
@@ -71,11 +71,11 @@ public class LoginController extends HttpServlet{
 		String pw =request.getParameter("psword");
 		
 		
-		//Validate Login with input
+		//Validate UsuarioModel with input
 		if(dao.validateLogin(em, pw))
 		{
 			//create session and store variables
-			Login user= dao.userSession(em);
+			UsuarioModel user= dao.userSession(em);
 			HttpSession session = request.getSession();
 	        session.setAttribute("username", user.getUsername());
 	        session.setAttribute("email", em);

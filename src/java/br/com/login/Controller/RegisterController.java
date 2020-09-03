@@ -10,25 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.login.dao.UserDao;
-import br.com.login.model.Login;
+import br.com.login.dao.UsuarioDao;
+import br.com.login.model.UsuarioModel;
 
 @WebServlet(name = "Register", urlPatterns = { "/Register" }) //set in web.xml
 public class RegisterController extends HttpServlet{	
 	private static final long serialVersionUID = 1L;	
 	private static String ADMINPG= "/admin.jsp";
 	//private static String WELCMPG= "/welcome.jsp";	
-	private UserDao dao;	
+	private UsuarioDao dao;	
 
 	public RegisterController() {
 		super();
-		dao = new UserDao(); //create new data object
+		dao = new UsuarioDao(); //create new data object
 		
 	}
 	
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
 	{
-		Login user = new Login();	//create new user object	
+		UsuarioModel user = new UsuarioModel();	//create new user object	
 		PrintWriter pwOut= response.getWriter();
 		
 		//get input from jsp and store it in user object
