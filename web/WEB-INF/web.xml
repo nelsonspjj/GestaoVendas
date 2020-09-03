@@ -6,8 +6,8 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>UsuarioController</display-name>
-    <servlet-name>Usuario</servlet-name>
+    <display-name>LoginController</display-name>
+    <servlet-name>Login</servlet-name>
     <servlet-class>com.controllers.servlet.LoginController</servlet-class>
   </servlet>
   <servlet>
@@ -18,20 +18,20 @@
   </servlet>
   <servlet>
     <description></description>
-    <display-name>RegisterController</display-name>
-    <servlet-name>Register</servlet-name>
-    <servlet-class>com.controllers.servlet.RegisterController</servlet-class>
+    <display-name>RegistroController</display-name>
+    <servlet-name>Registro</servlet-name>
+    <servlet-class>com.controllers.servlet.RegistroController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Usuario</servlet-name>
-    <url-pattern>/Usuario</url-pattern>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Register</servlet-name>
-    <url-pattern>/Register</url-pattern>
+    <servlet-name>Registro</servlet-name>
+    <url-pattern>/Registro</url-pattern>
   </servlet-mapping>
 </web-app>

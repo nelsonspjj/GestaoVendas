@@ -14,16 +14,15 @@ import javax.servlet.http.HttpSession;
 import br.com.login.dao.UsuarioDao;
 import br.com.login.model.UsuarioModel;
 
-@WebServlet(name = "Usuario", urlPatterns = { "/Usuario" })
-public class UsuarioController extends HttpServlet{
+@WebServlet(name = "Login", urlPatterns = { "/Login" })
+public class LoginController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private static String EDITPG= "/edit.jsp";
 	private static String ADMINPG= "/admin.jsp";
 	private static String WELCMPG= "/welcome.jsp";
-	//private static String REGISTPG= "/registration.jsp";
 	private UsuarioDao dao;	
 	
-	public UsuarioController()
+	public LoginController()
 	{
             super();
             dao = new UsuarioDao();
@@ -60,35 +59,30 @@ public class UsuarioController extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest pRequest,HttpServletResponse pResponse) throws ServletException, IOException
 	{
-		PrintWriter pwOut = pResponse.getWriter(); 
+		PrintWriter lWriter = pResponse.getWriter(); 
 
-		String em = pRequest.getParameter("email");
-		String pw = pRequest.getParameter("psword");
+		String lEmail = pRequest.getParameter("email");
+		String lSenha = pRequest.getParameter("senha");
 		
-		
-		//Validate UsuarioModel with input
-		if(dao.validateLogin(em, pw))
+		if(dao.validarLogin(lEmail, lSenha))
 		{
-			//create session and store variables
-			UsuarioModel user= dao.userSession(em);
-			HttpSession session = request.getSession();
-	        session.setAttribute("username", user.getUsername());
-	        session.setAttribute("email", em);
-	        //load welcome page with session data
-			RequestDispatcher view = request.getRequestDispatcher(WELCMPG);		
-			view.forward(request, response);
-			
+                    UsuarioModel lUsuario = dao.usuarioSessao(lEmail);
+                    HttpSession session = pRequest.getSession();
+                    
+                    session.setAttribute("login", lUsuario.getLogin());
+                    session.setAttribute("email", lEmail);
+                    
+                    RequestDispatcher view = pRequest.getRequestDispatcher(WELCMPG);		
+                    view.forward(pRequest, pResponse);
 		}
-		//if input is not stored in database print error message and reload page
 		else
 		{
-			pwOut.print("<p style=\"color:red\">Incorrect Username or Password!</p>");
-			RequestDispatcher view = request.getRequestDispatcher("/index.jsp");		
-			view.include(request, response);
-		
+                    lWriter.print("<p style=\"color:red\">Usuário ou senha incorretos!</p>");
+                    RequestDispatcher view = pRequest.getRequestDispatcher("/index.jsp");		
+                    view.include(pRequest, pResponse);
 		}
 	
-		pwOut.close();
+		lWriter.close();
 		
 	}
 }

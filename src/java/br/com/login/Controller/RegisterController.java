@@ -13,50 +13,46 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.login.dao.UsuarioDao;
 import br.com.login.model.UsuarioModel;
 
-@WebServlet(name = "Register", urlPatterns = { "/Register" }) //set in web.xml
+@WebServlet(name = "Registro", urlPatterns = { "/Registro" })
 public class RegisterController extends HttpServlet{	
 	private static final long serialVersionUID = 1L;	
-	private static String ADMINPG= "/admin.jsp";
-	//private static String WELCMPG= "/welcome.jsp";	
+	private static String ADMINPG = "/admin.jsp";	
 	private UsuarioDao dao;	
 
-	public RegisterController() {
-		super();
-		dao = new UsuarioDao(); //create new data object
-		
+	public RegisterController() 
+        {
+            super();
+            dao = new UsuarioDao();	
 	}
 	
-	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
+	protected void doPost(HttpServletRequest pRequest,HttpServletResponse pResponse) throws ServletException, IOException
 	{
-		UsuarioModel user = new UsuarioModel();	//create new user object	
-		PrintWriter pwOut= response.getWriter();
+		UsuarioModel lUsuario = new UsuarioModel();
+		PrintWriter lWriter = pResponse.getWriter();
 		
-		//get input from jsp and store it in user object
-		String un=request.getParameter("username");		
-		String pw =request.getParameter("psword");
-		String email=request.getParameter("email");
-		String userID = request.getParameter("userid");		
-		user.setUsername(un);			
-		user.setPsword(pw);
-		user.setEmail(email);
+		String lLogin = pRequest.getParameter("login");		
+		String lSenha = pRequest.getParameter("senha");
+		String lEmail = pRequest.getParameter("email");
+		String lUsuarioId = pRequest.getParameter("usuarioId");		
+		lUsuario.setLogin(lLogin);			
+		lUsuario.setSenha(lSenha);
+		lUsuario.setEmail(lEmail);
 		
-		//if there is no ID field a new user is being created and added to database
-		if(userID==null||userID.isEmpty())
+		if(lUsuarioId == null || lUsuarioId.isEmpty())
 		{
-			dao.createUser(user);				
-			pwOut.print("Registration Successful! Please Login.");
-			response.setContentType("text/html");
-			RequestDispatcher view = request.getRequestDispatcher("/index.jsp");		
-			view.include(request, response); //index page is reloaded with text for new user to login
+                    dao.criarUsuario(lUsuario);				
+                    lWriter.print("Cadastro realizado. Realize o login.");
+                    pResponse.setContentType("text/html");
+                    RequestDispatcher lView = pRequest.getRequestDispatcher("/index.jsp");		
+                    lView.include(pRequest, pResponse);
 		}
-		//if there is an ID field a user is being edited
 		else
 		{
-			user.setUserID(Integer.parseInt(userID));			
-			dao.editAccount(user);
-			request.setAttribute("users",dao.listUsers());
-			RequestDispatcher view = request.getRequestDispatcher(ADMINPG);		
-			view.forward(request, response); //reload admin page with updated table
+                    lUsuario.setUsuarioId(Integer.parseInt(lUsuarioId));			
+                    dao.editarUsuario(lUsuario);
+                    pRequest.setAttribute("usuarios", dao.listarUsuarios());
+                    RequestDispatcher lView = pRequest.getRequestDispatcher(ADMINPG);		
+                    lView.forward(pRequest, pResponse);
 		}				
 			
 	}
