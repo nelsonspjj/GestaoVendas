@@ -30,7 +30,7 @@ label{
 div#container {
 	position:relative;
 	overflow:hidden;
-    background-image: url('dottedbg.png');
+    background-image: url('box.png');
     background-size: 100% 100%;
     height:100%;
     width:100%;
@@ -42,7 +42,7 @@ div#container {
 div#loginBox {	
 	position:relative;
 	top: 25%;
-	background-color: steelblue;
+	background-color: darkcyan;
 	color: white;
 	box-sizing:border-box;	
 	border: 1px solid black;
@@ -94,7 +94,7 @@ input.theinput:hover {
 }
 
 .modal-header, h4, .close {
-      background-color: firebrick;
+      background-color: teal;
       color:white !important;
       text-align: center;
       font-size: 30px;
