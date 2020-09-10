@@ -52,9 +52,6 @@ public class LoginController extends HttpServlet {
         String lEmail = pRequest.getParameter("email");
         String lSenha = pRequest.getParameter("senha");
 
-        System.out.println("EMAIL -> " + lEmail);
-        System.out.println("SENHA -> " + lSenha);
-
         if (dao.validarLogin(lEmail, lSenha)) {
             UsuarioModel lUsuario = dao.usuarioSessao(lEmail);
             HttpSession session = pRequest.getSession();

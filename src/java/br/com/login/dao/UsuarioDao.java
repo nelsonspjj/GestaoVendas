@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.login.model.UsuarioModel;
-import br.com.login.dao.ConexaoDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +15,10 @@ public class UsuarioDao {
 
     private Connection conn;
     ConexaoDB conexao = new ConexaoDB();
-    
+
     public boolean validarLogin(String pEmail, String pSenha) {
         conn = conexao.getConnection();
-        
+
         boolean logado = false;
 
         try {

@@ -9,8 +9,8 @@ public class ConexaoDB {
 
     public Connection getConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/atividade", "root", "");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/atividade?useTimezone=true&serverTimezone=UTC", "root", "");
             if (connection != null) {
                 System.out.println("CONECTADO COM SUCESSO!");
             } else {
