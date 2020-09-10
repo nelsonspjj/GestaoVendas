@@ -2,38 +2,25 @@ package br.com.login.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class ConexaoDB {
 
-	private static Connection gConn = null;
-	public static Connection getConnection()
-	{
-            if(gConn != null) 
-                return gConn;
-            else
-            {
-                try
-                {
-                    String lURL = "jdbc:sqlserver://localhost:65070"+";databaseName=JUser";
+    private Connection connection = null;
 
-                    String lDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-                    String lDBUsuario = "sa";
-                    String lDBSenha = "King123";
-                    Class.forName(lDriver);
-                    gConn = DriverManager.getConnection(lURL, lDBUsuario, lDBSenha);
-                }
-                catch (ClassNotFoundException e) 
-                {
-                    e.printStackTrace();
-                }
-                catch (SQLException e) 
-                {
-                    e.printStackTrace();
-
-                }
-                return gConn;
+    public Connection getConnection() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/atividade", "root", "");
+            if (connection != null) {
+                System.out.println("CONECTADO COM SUCESSO!");
+            } else {
+                System.out.println("NÃO FOI POSSÍVEL CONECTAR AO BANCO DE DADOS.");
             }
-		
-	}
+            return connection;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException(ex);
+        }
+    }
+
 }

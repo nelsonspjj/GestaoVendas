@@ -12,7 +12,7 @@
 </head>
 <body>
 	<form action='Register' method="post" id="regform">
-		<fieldset style= "margin:auto text-align:center">
+		<fieldset style= "margin:auto; text-align:center">
 			<p><label for="usnm">Username</label> <input type="text" name="username" id="usnm" required/></p>		
 			<p><label for="eml">Email</label> <input type="text" name="email" id="eml" required/></p>			
 			<p><label for="psword">Password</label> <input type="password" id="psword" name="psword" required/></p>			

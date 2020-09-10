@@ -18,7 +18,7 @@
     <div id="container">
         <div align="center" id="loginBox">
             <form action='Login' method="post" id="userform">
-                <fieldset style= "margin:auto text-align:center">
+                <fieldset style= "margin:auto; text-align:center">
                 <legend class="legend-bold" >Login</legend>
                     <div>					
                         <label>Email:</label>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="modal-body" style="padding:30px 40px;">
                         <form action='Registro' method="post" id="cadform">
-                            <fieldset style= "margin:auto text-align:center">
+                            <fieldset style= "margin:auto; text-align:center">
                                     <div>
                                         <label for="usnm">Login: </label> 
                                         <input class="theinput" type="text" name="login" id="login" placeholder="Digite o login" required/>

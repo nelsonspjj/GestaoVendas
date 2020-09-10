@@ -10,7 +10,7 @@
 </head>
     <body>
         <form action="Registro" id="editarform" method="post">
-            <fieldset style= "margin:auto text-align:center">
+            <fieldset style= "margin:auto; text-align:center">
                 <div>
                     <label for="uid" >ID</label>
                     <input class="theinput" type="text" readonly="readonly" name="usuarioid" id="usuarioid" value="<c:out value ="${usuario.usuarioId}"/>" />
