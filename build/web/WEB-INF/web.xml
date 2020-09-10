@@ -8,19 +8,19 @@
     <description></description>
     <display-name>LoginController</display-name>
     <servlet-name>Login</servlet-name>
-    <servlet-class>com.controllers.servlet.LoginController</servlet-class>
+    <servlet-class>br.com.login.Controller.LoginController</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>LogoutController</display-name>
     <servlet-name>Logout</servlet-name>
-    <servlet-class>com.controllers.servlet.LogoutController</servlet-class>
+    <servlet-class>br.com.login.Controller.LogoutController</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>RegistroController</display-name>
     <servlet-name>Registro</servlet-name>
-    <servlet-class>com.controllers.servlet.RegistroController</servlet-class>
+    <servlet-class>br.com.login.Controller.RegistroController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
