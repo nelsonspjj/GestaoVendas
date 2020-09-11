@@ -18,9 +18,9 @@ import br.com.login.model.UsuarioModel;
 public class LoginController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String EDITPG = "/edit.jsp";
-    private static String ADMINPG = "/admin.jsp";
-    private static String WELCMPG = "/welcome.jsp";
+    private static final String EDITPG = "/edit.jsp";
+    private static final String ADMINPG = "/admin.jsp";
+    private static final String WELCMPG = "/welcome.jsp";
     private UsuarioDao dao = new UsuarioDao();
 
     protected void doGet(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
@@ -59,8 +59,9 @@ public class LoginController extends HttpServlet {
             session.setAttribute("login", lUsuario.getLogin());
             session.setAttribute("email", lEmail);
 
-            RequestDispatcher view = pRequest.getRequestDispatcher(WELCMPG);
-            view.forward(pRequest, pResponse);
+            pResponse.sendRedirect("/welcome");
+            //RequestDispatcher view = pRequest.getRequestDispatcher(WELCMPG);
+            //view.forward(pRequest, pResponse);
         } else {
             lWriter.print("<p style=\"color:red\">Usuário ou senha incorretos!</p>");
             RequestDispatcher view = pRequest.getRequestDispatcher("/index.jsp");
