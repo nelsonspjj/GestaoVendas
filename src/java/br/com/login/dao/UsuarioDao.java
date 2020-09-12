@@ -36,6 +36,8 @@ public class UsuarioDao {
     }
 
     public UsuarioModel usuarioSessao(String pEmail) {
+        conn = conexao.getConnection();
+
         UsuarioModel sessao = new UsuarioModel();
         try {
             PreparedStatement ps = conn.prepareStatement("select * from Usuario where email=?");
@@ -56,6 +58,8 @@ public class UsuarioDao {
     }
 
     public void criarUsuario(UsuarioModel pLogin) {
+        conn = conexao.getConnection();
+
         try {
             PreparedStatement ps = conn.prepareStatement("insert into usuario(login, senha, email) values (?,?,?)");
             ps.setString(1, pLogin.getLogin());
@@ -68,6 +72,8 @@ public class UsuarioDao {
     }
 
     public void editarUsuario(UsuarioModel pUsuario) {
+        conn = conexao.getConnection();
+
         try {
             PreparedStatement ps = conn.prepareStatement("update usuario set login = ?, senha = ? where usuarioId = ?");
             ps.setString(1, pUsuario.getLogin());
