@@ -36,9 +36,9 @@ public class UsuarioDao {
     }
 
     public UsuarioModel usuarioSessao(String pEmail) {
-        UsuarioModel sessao = new UsuarioModel();
         conn = conexao.getConnection();
-        
+
+        UsuarioModel sessao = new UsuarioModel();
         try {
             PreparedStatement ps = conn.prepareStatement("select * from Usuario where email=?");
             ps.setString(1, pEmail);
@@ -59,7 +59,7 @@ public class UsuarioDao {
 
     public void criarUsuario(UsuarioModel pLogin) {
         conn = conexao.getConnection();
-        
+
         try {
             PreparedStatement ps = conn.prepareStatement("insert into usuario(login, senha, email) values (?,?,?)");
             ps.setString(1, pLogin.getLogin());
@@ -73,7 +73,7 @@ public class UsuarioDao {
 
     public void editarUsuario(UsuarioModel pUsuario) {
         conn = conexao.getConnection();
-        
+
         try {
             PreparedStatement ps = conn.prepareStatement("update usuario set login = ?, senha = ? where usuarioId = ?");
             ps.setString(1, pUsuario.getLogin());
@@ -86,8 +86,6 @@ public class UsuarioDao {
     }
 
     public void excluirUsuario(int pUsuarioId) {
-        conn = conexao.getConnection();
-        
         try {
             PreparedStatement ps = conn.prepareStatement("delete from usuario where usuarioId = ?");
             ps.setInt(1, pUsuarioId);
@@ -99,7 +97,6 @@ public class UsuarioDao {
 
     public List<UsuarioModel> listarUsuarios() {
         List<UsuarioModel> userList = new ArrayList<UsuarioModel>();
-        conn = conexao.getConnection();
 
         try {
             Statement st = conn.createStatement();
@@ -122,7 +119,6 @@ public class UsuarioDao {
 
     public UsuarioModel buscarUsuarioPorID(int pUsuarioId) {
         UsuarioModel usuario = new UsuarioModel();
-        conn = conexao.getConnection();
 
         try {
             PreparedStatement ps = conn.prepareStatement("select * from usuario where usuarioId = ?");
