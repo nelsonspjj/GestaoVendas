@@ -58,10 +58,11 @@ public class LoginController extends HttpServlet {
 
             session.setAttribute("login", lUsuario.getLogin());
             session.setAttribute("email", lEmail);
+            session.setAttribute("nome", lUsuario.getNome());
 
-            pResponse.sendRedirect("/welcome");
-            //RequestDispatcher view = pRequest.getRequestDispatcher(WELCMPG);
-            //view.forward(pRequest, pResponse);
+//            pResponse.sendRedirect("/welcome.jsp");
+            RequestDispatcher view = pRequest.getRequestDispatcher(WELCMPG);
+            view.forward(pRequest, pResponse);
         } else {
             lWriter.print("<p style=\"color:red\">Usuário ou senha incorretos!</p>");
             RequestDispatcher view = pRequest.getRequestDispatcher("/index.jsp");

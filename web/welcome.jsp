@@ -7,22 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Welcome <%=session.getAttribute("login")%></title>
+<title>Welcome <%=session.getAttribute("nome")%></title>
 <link rel="stylesheet" href="thestyles2.css">
 </head>
 <body>
-<% 
-    if (session != null)
-    {
-        if(session.getAttribute("login")==null)
-            response.sendRedirect("index.jsp");		
-    }
-%>
 <div class= "top-header"><span class= "home-logo"><a href="/JSPLogin"></a></span></div>
 
 <div class="container">
     <div class="content welcome-text">
-        <p><%=session.getAttribute("login")%> Login realizado com sucesso!:)</p>
+        <p><%=session.getAttribute("nome")%>, Login realizado com sucesso!:)</p>
         <p> Registrado no e-mail: <%=session.getAttribute("email")%> </p>
         <br>
     </div>

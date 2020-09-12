@@ -48,6 +48,7 @@ public class UsuarioDao {
             if (rs.next()) {
                 sessao.setUsuarioId(rs.getInt("usuarioId"));
                 sessao.setLogin(rs.getString("login"));
+                sessao.setNome(rs.getString("nome"));
                 sessao.setSenha(rs.getString("senha"));
                 sessao.setEmail(rs.getString("email"));
             }
