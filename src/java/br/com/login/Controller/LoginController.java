@@ -58,6 +58,7 @@ public class LoginController extends HttpServlet {
 
             session.setAttribute("login", lUsuario.getLogin());
             session.setAttribute("email", lEmail);
+            session.setAttribute("username", lUsuario.getLogin());
 
             RequestDispatcher view = pRequest.getRequestDispatcher(WELCMPG);
             view.forward(pRequest, pResponse);

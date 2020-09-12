@@ -25,8 +25,8 @@
 <div class="container">
 <!-- Use session variables to print username and email -->
 	<div class="content welcome-text">
-			<p><%=session.getAttribute("username")%> Your login was successful!:)</p>
-			<p> You are registered under this email <%=session.getAttribute("email")%> </p>
+			<p><%=session.getAttribute("username")%> Seu login foi bem sucedido!:)</p>
+			<p> Você está registrado neste e-mail <%=session.getAttribute("email")%> </p>
 			<br>
 		
 	</div>
