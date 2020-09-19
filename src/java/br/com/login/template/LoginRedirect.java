@@ -12,7 +12,7 @@ public class LoginRedirect extends Redirect {
     @Override
     public boolean verificaSessao(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return !session.getAttribute("id").toString().isEmpty();
+        return session.getAttribute("id") != null;
     }
 
     @Override

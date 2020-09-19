@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 
     protected void doGet(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
         String redirectPage = "/index.jsp";
-        String lAcao = pRequest.getParameter("acao");
+        String lAcao = pRequest.getParameter("action");
 
         if (lAcao.equalsIgnoreCase("remove")) {
             Long id = Long.parseLong(pRequest.getParameter("usuarioId"));

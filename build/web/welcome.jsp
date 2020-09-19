@@ -8,14 +8,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Welcome <%=session.getAttribute("nome")%></title>
+        <title>Lista de Produtos</title>
         <link rel="stylesheet" href="thestyles2.css">
 
         <jsp:useBean id="welcomeController" scope="application" class="br.com.login.Controller.WelcomeController"/>
-
+        
     </head>
     <body>
-        <div class= "top-header"><span class= "home-logo"><a href="/LoginAppWeb/welcome.jsp"></a></span></div>
+        <div class= "top-header">
+            <h1>Bem-vindo, <%= session.getAttribute("nome")%></h1>
+            <span class="home-logo"><a href="/LoginAppWeb/welcome.jsp"></a></span>
+        </div>
 
         <div class="container">
             <div class="content welcome-text" align="center">

@@ -15,12 +15,15 @@ import java.util.List;
 
 public class UsuarioDao implements Persistencia {
 
-    private Connection conn;
-    private MySQL conexao = new MySQL();
+    private final Connection conn;
+    private final MySQL conexao;
+
+    public UsuarioDao() {
+        conexao = new MySQL();
+        conn = conexao.getConnection();
+    }
 
     public boolean validarLogin(String pEmail, String pSenha) {
-        conn = conexao.getConnection();
-
         boolean logado = false;
 
         try {
@@ -38,9 +41,8 @@ public class UsuarioDao implements Persistencia {
     }
 
     public UsuarioModel usuarioSessao(String pEmail) {
-        conn = conexao.getConnection();
-
         UsuarioModel sessao = new UsuarioModel();
+
         try {
             PreparedStatement ps = conn.prepareStatement("select * from Usuario where email=?");
             ps.setString(1, pEmail);
@@ -64,13 +66,12 @@ public class UsuarioDao implements Persistencia {
     public void salvar(Object object) {
         UsuarioModel usuario = (UsuarioModel) object;
 
-        conn = conexao.getConnection();
-
         try {
-            PreparedStatement ps = conn.prepareStatement("insert into usuario(login, senha, email) values (?,?,?)");
-            ps.setString(1, usuario.getLogin());
-            ps.setString(2, usuario.getSenha());
-            ps.setString(3, usuario.getEmail());
+            PreparedStatement ps = conn.prepareStatement("insert into usuario(nome, login, senha, email) values (?,?,?,?)");
+            ps.setString(1, usuario.getNome());
+            ps.setString(2, usuario.getLogin());
+            ps.setString(3, usuario.getSenha());
+            ps.setString(4, usuario.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -102,7 +103,6 @@ public class UsuarioDao implements Persistencia {
     @Override
     public void update(Object object) {
         UsuarioModel usuario = (UsuarioModel) object;
-        conn = conexao.getConnection();
 
         try {
             PreparedStatement ps = conn.prepareStatement("update usuario set login = ?, senha = ? where usuarioId = ?");
