@@ -1,5 +1,7 @@
 package br.com.login.dao;
 
+import br.com.login.database.MySQL;
+import br.com.login.adapter.Persistencia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -11,10 +13,10 @@ import br.com.login.model.UsuarioModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDao {
+public class UsuarioDao implements Persistencia {
 
     private Connection conn;
-    ConexaoDB conexao = new ConexaoDB();
+    private MySQL conexao = new MySQL();
 
     public boolean validarLogin(String pEmail, String pSenha) {
         conn = conexao.getConnection();
@@ -29,7 +31,7 @@ public class UsuarioDao {
             ResultSet rs = ps.executeQuery();
             logado = rs.next();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return logado;
@@ -53,51 +55,80 @@ public class UsuarioDao {
                 sessao.setEmail(rs.getString("email"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return sessao;
     }
 
-    public void criarUsuario(UsuarioModel pLogin) {
+    @Override
+    public void salvar(Object object) {
+        UsuarioModel usuario = (UsuarioModel) object;
+
         conn = conexao.getConnection();
 
         try {
             PreparedStatement ps = conn.prepareStatement("insert into usuario(login, senha, email) values (?,?,?)");
-            ps.setString(1, pLogin.getLogin());
-            ps.setString(2, pLogin.getSenha());
-            ps.setString(3, pLogin.getEmail());
+            ps.setString(1, usuario.getLogin());
+            ps.setString(2, usuario.getSenha());
+            ps.setString(3, usuario.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void editarUsuario(UsuarioModel pUsuario) {
+    @Override
+    public Object findById(Long id) {
+        UsuarioModel usuario = new UsuarioModel();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from usuario where usuarioId = ?");
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                usuario.setUsuarioId(rs.getInt("usuarioId"));
+                usuario.setLogin(rs.getString("login"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setEmail(rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return usuario;
+    }
+
+    @Override
+    public void update(Object object) {
+        UsuarioModel usuario = (UsuarioModel) object;
         conn = conexao.getConnection();
 
         try {
             PreparedStatement ps = conn.prepareStatement("update usuario set login = ?, senha = ? where usuarioId = ?");
-            ps.setString(1, pUsuario.getLogin());
-            ps.setString(2, pUsuario.getSenha());
-            ps.setInt(3, pUsuario.getUsuarioId());
+            ps.setString(1, usuario.getLogin());
+            ps.setString(2, usuario.getSenha());
+            ps.setInt(3, usuario.getUsuarioId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void excluirUsuario(int pUsuarioId) {
+    @Override
+    public void deleteById(Long id) {
         try {
             PreparedStatement ps = conn.prepareStatement("delete from usuario where usuarioId = ?");
-            ps.setInt(1, pUsuarioId);
+            ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
-    public List<UsuarioModel> listarUsuarios() {
-        List<UsuarioModel> userList = new ArrayList<UsuarioModel>();
+    @Override
+    public List<Object> findAll() {
+        List<Object> userList = new ArrayList<>();
 
         try {
             Statement st = conn.createStatement();
@@ -112,30 +143,9 @@ public class UsuarioDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return userList;
-    }
-
-    public UsuarioModel buscarUsuarioPorID(int pUsuarioId) {
-        UsuarioModel usuario = new UsuarioModel();
-
-        try {
-            PreparedStatement ps = conn.prepareStatement("select * from usuario where usuarioId = ?");
-            ps.setInt(1, pUsuarioId);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                usuario.setUsuarioId(rs.getInt("pUsuarioId"));
-                usuario.setLogin(rs.getString("login"));
-                usuario.setSenha(rs.getString("senha"));
-                usuario.setEmail(rs.getString("email"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return usuario;
     }
 }

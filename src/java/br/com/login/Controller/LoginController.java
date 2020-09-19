@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.login.dao.UsuarioDao;
 import br.com.login.model.UsuarioModel;
+import br.com.login.template.LoginRedirect;
 
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class LoginController extends HttpServlet {
@@ -21,29 +22,35 @@ public class LoginController extends HttpServlet {
     private static final String EDITPG = "/edit.jsp";
     private static final String ADMINPG = "/admin.jsp";
     private static final String WELCMPG = "/welcome.jsp";
-    private UsuarioDao dao = new UsuarioDao();
+
+    private final UsuarioDao usuarioDao;
+    private final LoginRedirect loginRedirect;
+
+    public LoginController() {
+        usuarioDao = new UsuarioDao();
+        loginRedirect = new LoginRedirect();
+    }
 
     protected void doGet(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
-        String lRedirectPage = "/index.jsp";
+        String redirectPage = "/index.jsp";
         String lAcao = pRequest.getParameter("acao");
 
         if (lAcao.equalsIgnoreCase("remove")) {
-            int lUsuarioId = Integer.parseInt(pRequest.getParameter("usuarioId"));
-            dao.excluirUsuario(lUsuarioId);
-            lRedirectPage = ADMINPG;
-            pRequest.setAttribute("users", dao.listarUsuarios());
+            Long id = Long.parseLong(pRequest.getParameter("usuarioId"));
+            usuarioDao.deleteById(id);
+            redirectPage = ADMINPG;
+            pRequest.setAttribute("users", usuarioDao.findAll());
         } else if (lAcao.equalsIgnoreCase("listarUsuarios")) {
-            lRedirectPage = ADMINPG;
-            pRequest.setAttribute("usuarios", dao.listarUsuarios());
+            redirectPage = ADMINPG;
+            pRequest.setAttribute("usuarios", usuarioDao.findAll());
         } else if (lAcao.equalsIgnoreCase("editar")) {
-            lRedirectPage = EDITPG;
-            int lUsuarioId = Integer.parseInt(pRequest.getParameter("usuarioId"));
-            UsuarioModel lUsuario = dao.buscarUsuarioPorID(lUsuarioId);
+            redirectPage = EDITPG;
+            Long id = Long.parseLong(pRequest.getParameter("usuarioId"));
+            UsuarioModel lUsuario = (UsuarioModel) usuarioDao.findById(id);
             pRequest.setAttribute("user", lUsuario);
         }
 
-        RequestDispatcher lView = pRequest.getRequestDispatcher(lRedirectPage);
-        lView.forward(pRequest, pResponse);
+        loginRedirect.executar(pRequest, pResponse, redirectPage);
     }
 
     protected void doPost(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
@@ -52,17 +59,16 @@ public class LoginController extends HttpServlet {
         String lEmail = pRequest.getParameter("email");
         String lSenha = pRequest.getParameter("senha");
 
-        if (dao.validarLogin(lEmail, lSenha)) {
-            UsuarioModel lUsuario = dao.usuarioSessao(lEmail);
+        if (usuarioDao.validarLogin(lEmail, lSenha)) {
+            UsuarioModel lUsuario = usuarioDao.usuarioSessao(lEmail);
             HttpSession session = pRequest.getSession();
 
+            session.setAttribute("id", lUsuario.getUsuarioId());
             session.setAttribute("login", lUsuario.getLogin());
             session.setAttribute("email", lEmail);
             session.setAttribute("nome", lUsuario.getNome());
 
-//            pResponse.sendRedirect("/welcome.jsp");
-            RequestDispatcher view = pRequest.getRequestDispatcher(WELCMPG);
-            view.forward(pRequest, pResponse);
+            loginRedirect.executar(pRequest, pResponse, WELCMPG);
         } else {
             lWriter.print("<p style=\"color:red\">Usuário ou senha incorretos!</p>");
             RequestDispatcher view = pRequest.getRequestDispatcher("/index.jsp");
