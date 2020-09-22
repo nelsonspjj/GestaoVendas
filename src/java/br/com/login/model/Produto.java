@@ -7,6 +7,17 @@ public class Produto {
     private double preco;
     private String observacao;
 
+    
+    public Produto() {
+       
+    }
+    
+    public Produto(String nome, double preco, String observacao) {
+        this.nome = nome;
+        this.preco = preco;
+        this.observacao = observacao;
+    }
+    
     public Long getId() {
         return id;
     }

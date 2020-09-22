@@ -14,8 +14,8 @@ import java.util.List;
 
 public class ProdutoDAO implements Persistencia {
 
-    private final Connection connection;
-    private final SQLServer sqlServer;
+    private Connection connection;
+    private SQLServer sqlServer;
 
     public ProdutoDAO() {
         sqlServer = new SQLServer();
@@ -44,7 +44,21 @@ public class ProdutoDAO implements Persistencia {
 
     @Override
     public void update(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Produto produto = (Produto) object;
+        
+        sqlServer = new SQLServer();
+        
+        connection = sqlServer.getConnection();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("update produto set nome = ?, preco = ?, observacao = ? where produtoid = ?");
+            ps.setString(1, produto.getNome());
+            ps.setDouble(2, produto.getPreco());
+            ps.setString(3, produto.getObservacao());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
