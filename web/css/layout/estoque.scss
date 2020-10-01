@@ -1,0 +1,13 @@
+.input-estoque {
+    max-width: 200px!important;
+}
+
+.form-search {
+    @media (max-width: 720px) {
+        margin-top: 20px;
+    }
+}
+
+.input-produto:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+}

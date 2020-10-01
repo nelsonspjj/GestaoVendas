@@ -11,17 +11,27 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.mssql-jdbc-8.2.2.jre8.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${libs.jstl.classpath}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.jstl.jar}</file>
+                    <file>${file.reference.mariadb-java-client-2.4.4-sources.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javaee-endorsed-api-7.0-javadoc.jar}</file>
+                    <file>${file.reference.mariadb-java-client-2.4.4.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.javax.persistence-api-2.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.hibernate-commons-annotations-5.1.0.Final.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${libs.hibernate4-persistence.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jandex-2.0.5.Final.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

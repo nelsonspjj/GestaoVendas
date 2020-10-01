@@ -1,0 +1,21 @@
+.menu-conteudo{
+  h1 {
+    font-size: 2em;
+  }
+}
+
+.btn-menu {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 720px) {
+        height: 50px;
+    }
+
+    &:hover {
+      background-color: darken($cor-secundaria, 10%);  
+      color: #fff;
+    }
+}

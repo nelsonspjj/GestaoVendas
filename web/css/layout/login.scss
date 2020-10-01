@@ -1,0 +1,50 @@
+body {
+    min-height: 100vh;
+}
+
+
+.form_login {   
+    width: 100%;
+}
+
+.img-fundo {
+    width: 120%;
+    max-width: 800px;
+
+    @media (max-width:720px) {
+        display: none;
+    }
+}
+
+.input-login {
+    background-color: transparent;
+    border: none;
+    border-bottom: solid #fff 1px;
+    border-radius: 0px;
+    color: $cor-auxiliar;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.icon {
+    max-width: 25px;
+}
+
+#btn-login {
+    @media (max-width:720px) {
+        width: 100%;
+    }
+}

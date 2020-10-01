@@ -1,9 +1,11 @@
 package br.com.login.dao;
 
 import br.com.login.adapter.Persistencia;
+import br.com.login.database.MySQL;
 import br.com.login.database.SQLServer;
 import br.com.login.model.Produto;
 import br.com.login.model.UsuarioModel;
+import br.com.login.util.JPAUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,18 +13,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
-public class ProdutoDAO implements Persistencia {
+public class ProdutoDAO  {
 
     private Connection connection;
-    private SQLServer sqlServer;
+    private MySQL
+            sqlServer;
 
     public ProdutoDAO() {
-        sqlServer = new SQLServer();
+        sqlServer = new MySQL();
         connection = sqlServer.getConnection();
     }
 
-    @Override
+   // @Override
     public void salvar(Object object) {
         Produto produto = (Produto) object;
 
@@ -37,16 +42,16 @@ public class ProdutoDAO implements Persistencia {
         }
     }
 
-    @Override
+   // @Override
     public Object findById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+   // @Override
     public void update(Object object) {
         Produto produto = (Produto) object;
         
-        sqlServer = new SQLServer();
+       // sqlServer = new SQLServer();
         
         connection = sqlServer.getConnection();
 
@@ -61,13 +66,13 @@ public class ProdutoDAO implements Persistencia {
         }
     }
 
-    @Override
+   // @Override
     public void deleteById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Object> findAll() {
+   // @Override
+    public List<Object> findAll2() {
         List<Object> produtos = new ArrayList<>();
 
         try {
@@ -87,5 +92,50 @@ public class ProdutoDAO implements Persistencia {
 
         return produtos;
     }
+    
+        public void adiciona(Produto produto) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		em.getTransaction().begin();
+		em.persist(produto);
+		em.getTransaction().commit();
+		em.close();
+	}
+
+	public void alterar(Produto produto) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		em.getTransaction().begin();
+		Produto novo_produto = em.find(Produto.class, produto.getId());
+		novo_produto.setNome(produto.getNome());
+		novo_produto.setPreco(produto.getPreco());
+		novo_produto.setObservacao(produto.getObservacao());
+		em.getTransaction().commit();
+		em.close();
+	}
+
+	public void remove(Long valor) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		em.getTransaction().begin();
+		Produto produto = em.find(Produto.class, valor);
+		em.remove(produto);
+		em.getTransaction().commit();
+		em.close();
+	}
+    
+    public ArrayList<Produto> findAll() {
+        ArrayList<Produto> lista = new ArrayList<>();
+        
+	EntityManager em = new JPAUtil().getEntityManager();
+	em.getTransaction().begin();
+
+	Query query = em.createQuery("SELECT u FROM Produto u");
+        List<Produto> produtos = query.getResultList();
+        for(Produto produto : produtos){
+    		lista.add(produto);
+        }
+
+		em.getTransaction().commit();
+		em.close();
+		return lista;
+	}
 
 }

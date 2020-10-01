@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.login.dao.UsuarioDao;
 import br.com.login.model.UsuarioModel;
+import br.com.login.dao.UsuariosDAO;
 import br.com.login.template.LoginRedirect;
 
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
@@ -58,15 +59,18 @@ public class LoginController extends HttpServlet {
 
         String lEmail = pRequest.getParameter("email");
         String lSenha = pRequest.getParameter("senha");
+        
+        UsuariosDAO usuarios = new UsuariosDAO();
+	UsuarioModel usuario = usuarios.existeUsuario(lEmail, lSenha);
 
-        if (usuarioDao.validarLogin(lEmail, lSenha)) {
-            UsuarioModel lUsuario = usuarioDao.usuarioSessao(lEmail);
+        if(usuario != null) {
+            //UsuarioModel lUsuario = usuarioDao.usuarioSessao(lEmail);
             HttpSession session = pRequest.getSession();
 
-            session.setAttribute("id", lUsuario.getUsuarioId());
-            session.setAttribute("login", lUsuario.getLogin());
+            session.setAttribute("id", usuario.getUsuarioId());
+            session.setAttribute("login", usuario.getLogin());
             session.setAttribute("email", lEmail);
-            session.setAttribute("nome", lUsuario.getNome());
+            session.setAttribute("nome", usuario.getNome());
 
             loginRedirect.executar(pRequest, pResponse, WELCMPG);
         } else {

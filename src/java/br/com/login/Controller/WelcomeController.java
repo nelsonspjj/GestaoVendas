@@ -2,11 +2,16 @@ package br.com.login.Controller;
 
 import br.com.login.dao.ProdutoDAO;
 import br.com.login.model.Produto;
+import br.com.login.model.UsuarioModel;
 import br.com.login.template.LoginRedirect;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,13 +46,13 @@ public class WelcomeController extends HttpServlet {
     }
 
     public List<Produto> getProdutos() {
-        Iterator<Object> objects = produtoDAO.findAll().iterator();
-        List<Produto> produtos = new ArrayList<>();
+      
         
-        while(objects.hasNext()) {
-            produtos.add((Produto) objects.next());
-        }
-        
-        return produtos;
+       ArrayList<Produto> listaProdutos = produtoDAO.findAll();
+        //request.setAttribute("produtos", listaProdutos);
+      
+        return listaProdutos;
     }
+    
+   
 }
