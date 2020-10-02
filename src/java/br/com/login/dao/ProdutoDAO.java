@@ -93,6 +93,15 @@ public class ProdutoDAO  {
         return produtos;
     }
     
+    public Produto consulta(Long id) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		em.getTransaction().begin();
+		Produto produto = em.find(Produto.class, id);
+		em.getTransaction().commit();
+		em.close();
+		return produto;
+	}
+    
         public void adiciona(Produto produto) {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();

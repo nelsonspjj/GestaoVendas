@@ -15,9 +15,6 @@
         
     </head>
     
-   
-
-
 
 <jsp:include page="trechos/header.jsp" />
 

@@ -3,19 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/command/navegacao/PageCadastrarProdutoEstoque.java</file>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/web/cadastra-estoque.jsp</file>
+            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/web/editaProduto.jsp</file>
             <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/web/trechos/menu.jsp</file>
             <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/dao/ProdutoDAO.java</file>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/template/Redirect.java</file>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/web/welcome.jsp</file>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/model/Produto.java</file>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/Controller/LoginController.java</file>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/template/LoginRedirect.java</file>
+            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/command/navegacao/AlteraProduto.java</file>
             <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/dao/UsuariosDAO.java</file>
             <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/Controller/UnicaEntradaServlet.java</file>
+            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/web/venda.jsp</file>
             <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/command/navegacao/AdicionaProduto.java</file>
-            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/Controller/WelcomeController.java</file>
+            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/command/navegacao/PageVenda.java</file>
+            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/web/welcome.jsp</file>
+            <file>file:/C:/Users/nelsonju/Documents/NetBeansProjects/LoginAppWeb/LoginAppWeb/src/java/br/com/login/command/navegacao/RemoveProduto.java</file>
         </group>
     </open-files>
 </project-private>

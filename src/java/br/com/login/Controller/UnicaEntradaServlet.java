@@ -2,8 +2,11 @@
 package br.com.login.Controller;
 
 import br.com.login.command.navegacao.AdicionaProduto;
+import br.com.login.command.navegacao.AlteraProduto;
 import br.com.login.command.navegacao.PageCadastrarProdutoEstoque;
+import br.com.login.command.navegacao.PageEditaProduto;
 import br.com.login.command.navegacao.PageEstoque;
+import br.com.login.command.navegacao.PageVenda;
 import br.com.login.command.navegacao.RemoveProduto;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,8 +48,8 @@ public class UnicaEntradaServlet extends HttpServlet {
 			acao.executa(request, response);
 
 		} else if (paramAcao.equals("alterando_produto")) {
-			//ActionAlteraProduto acao = new ActionAlteraProduto();
-			//nome = acao.executa(request, response);
+			AlteraProduto acao = new AlteraProduto();
+			acao.executa(request, response);
 			
 		} else if (paramAcao.equals("remover_quantidade")) {
 			//ActionRemoverQuantidade acao = new ActionRemoverQuantidade();
@@ -68,8 +71,6 @@ public class UnicaEntradaServlet extends HttpServlet {
 			//ActionLogout acao = new ActionLogout();
 			//nome = acao.executa(request, response);
 		}
-		
-		
 
 		else if (paramAcao.equals("cadastro_estoque")) {
 			PageCadastrarProdutoEstoque acao = new PageCadastrarProdutoEstoque();
@@ -80,8 +81,8 @@ public class UnicaEntradaServlet extends HttpServlet {
 			//nome = acao.executa(request, response);
 
 		} else if (paramAcao.equals("editar_produto")) {
-			//PageEditaProduto acao = new PageEditaProduto();
-			//nome = acao.executa(request, response);
+			PageEditaProduto acao = new PageEditaProduto();
+			acao.executa(request, response);
 
 		} else if (paramAcao.equals("estoque")) {
 			PageEstoque acao = new PageEstoque();                       
@@ -100,8 +101,8 @@ public class UnicaEntradaServlet extends HttpServlet {
 			//nome = acao.executa(request, response);
 
 		} else if (paramAcao.equals("venda")) {
-			//PageVenda acao = new PageVenda();
-			//nome = acao.executa(request, response);
+			PageVenda acao = new PageVenda();
+			acao.executa(request, response);
 		}
 
 //		String[] tipoEndereco = nome.split(":");

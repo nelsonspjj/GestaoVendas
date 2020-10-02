@@ -32,7 +32,7 @@ public class AdicionaProduto {
 		produto.setPreco(precoConvertido);
 		produto.setObservacao(descricaoProduto);
 
-		 ProdutoDAO produtoDAO =  new ProdutoDAO();
+		ProdutoDAO produtoDAO =  new ProdutoDAO();
 		produtoDAO.adiciona(produto);
 
 		executaRetorno(request, response);
