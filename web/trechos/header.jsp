@@ -7,6 +7,6 @@
     <meta name="theme-color" content="#111">
     <meta name="apple-mobile-web-app-status-bar-style" content="#111">
 
-    <title>Gestão Real</title>
+    <title>Gestão Venda</title>
     <link href="css/style.css" rel="stylesheet">
 </head>

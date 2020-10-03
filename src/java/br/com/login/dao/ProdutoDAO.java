@@ -93,6 +93,10 @@ public class ProdutoDAO  {
         return produtos;
     }
     
+    
+    
+    // Abaixo segue implementação JPA
+    
     public Produto consulta(Long id) {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();

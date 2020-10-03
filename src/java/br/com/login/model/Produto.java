@@ -8,12 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//Anotação que informa que a classe mapeada é persistente
 @Entity
+//Informando nome e esquema da tabela mapeada
 @Table(name = "PRODUTO")
 public class Produto implements Serializable {
     
+    //Definição da chave primária
     @Id
+    
+    //Definição do mecanismo de definição da chave primária
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    //Informa o nome da coluna mapeada para o atributo
     @Column(name = "produtoid")
     private Long id;
     
